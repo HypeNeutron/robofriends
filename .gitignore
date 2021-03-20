@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+#Error
+/src/components/ErrorBoundaries.js
+
 # testing
 /coverage
 

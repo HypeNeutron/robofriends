@@ -1,0 +1,5 @@
+.scrolls {
+  overflow-y: scroll;
+  border: 5px solid #000;
+  height: 500px;
+}

@@ -26,7 +26,6 @@ export default function App() {
   }
 
   const searchTyping = dataSearch.searchField;
-
   const filterRobotsCardByName = dataSearch.robots.filter((robots) => {
     const robotsName = robots.name;
     return robotsName.match(new RegExp(`^${searchTyping}`, "i")); //dynamic regex

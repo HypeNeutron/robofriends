@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Card = ({ robots }) => {
+export function Card({ robots }) {
   return (
     <div>
       {robots.map((user, i) => {
@@ -15,7 +15,7 @@ export const Card = ({ robots }) => {
       })}
     </div>
   );
-};
+}
 
 export const CardList = ({ name, email, id }) => {
   return (

@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Card } from "../components/Card";
-import { SearchBox } from "../components/SearchBox";
-import { Scroll } from "../components/Scroll";
-import "./App.css";
+import React, { useState, useEffect } from 'react';
+import { Card } from '../components/Card';
+import { SearchBox } from '../components/SearchBox';
+import { Scroll } from '../components/Scroll';
+import './App.css';
 
 export default function App() {
   const [dataSearch, setDataSearch] = useState({
     robots: [],
-    searchField: "",
+    searchField: '',
   });
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch('https://jsonplaceholder.typicode.com/users')
       .then((response) => {
         return response.json();
       })
@@ -26,9 +26,10 @@ export default function App() {
   }
 
   const searchTyping = dataSearch.searchField;
+
   const filterRobotsCardByName = dataSearch.robots.filter((robots) => {
     const robotsName = robots.name;
-    return robotsName.match(new RegExp(`^${searchTyping}`, "i")); //dynamic regex
+    return robotsName.match(new RegExp(`^${searchTyping}`, 'i')); //dynamic regex
   });
 
   return !dataSearch.robots ? (

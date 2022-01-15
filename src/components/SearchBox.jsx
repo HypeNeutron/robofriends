@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-export const SearchBox = ({ searchChange }) => {
+export default function SearchBox({ searchChange }) {
   return (
     <div className="pa2">
       <input
@@ -11,4 +11,4 @@ export const SearchBox = ({ searchChange }) => {
       />
     </div>
   );
-};
+}

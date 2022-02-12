@@ -10,20 +10,44 @@ export default function App() {
     robots: [],
     searchField: "",
   });
-
+  const [online, setOnline] = useState(true);
   const { robots, searchField } = dataRobots;
 
   const API_ENDPOINT = "https://jsonplaceholder.typicode.com/users";
 
+  const fetchUsers = async () => {
+    try {
+      const res = await axios(API_ENDPOINT);
+      if (!res.status === 200) {
+        throw new Error(res.status);
+      }
+      setDataRobots((prev) => ({ ...prev, robots: res.data }));
+      setOnline(true);
+    } catch (err) {
+      if (err.toString().includes("Network Error")) {
+        setOnline(false);
+      } else {
+        throw new Error(err);
+      }
+    }
+  };
+
   useEffect(() => {
-    axios(API_ENDPOINT).then((users) => {
-      setDataRobots((prev) => ({ ...prev, robots: users.data }));
-    });
+    fetchUsers();
   }, []);
 
   const onSearchChange = ({ target }) => {
     setDataRobots((prev) => ({ ...prev, searchField: target.value }));
   };
+
+  if (!online) {
+    const reFetch = setInterval(() => {
+      fetchUsers();
+    }, 10000);
+    if (online) {
+      clearInterval(reFetch);
+    }
+  }
 
   const filterRobotsCardByName = robots.filter((robot) => {
     const { name } = robot;
@@ -39,7 +63,14 @@ export default function App() {
       <h1 className="f1">RoboFriends</h1>
       <SearchBox searchChange={onSearchChange} />
       <ScrollWrapper>
-        {!searchLength && (
+        {!online && (
+          <div className="empty-container">
+            <h2 className="tc">
+              You are offline..Please check your internet connection.
+            </h2>
+          </div>
+        )}
+        {!searchLength && online && (
           <div className="empty-container">
             <h2 className="tc">Do Not Match Any Searching</h2>
           </div>

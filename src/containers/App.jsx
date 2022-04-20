@@ -11,18 +11,21 @@ export default function App() {
     searchField: "",
   });
   const [online, setOnline] = useState(true);
+  const [loading, setLoading] = useState(true);
   const { robots, searchField } = dataRobots;
 
   const API_ENDPOINT = "https://jsonplaceholder.typicode.com/users";
 
   const fetchUsers = async () => {
     try {
+      setLoading(true);
       const res = await axios(API_ENDPOINT);
       if (!res.status === 200) {
         throw new Error(res.status);
       }
       setDataRobots((prev) => ({ ...prev, robots: res.data }));
       setOnline(true);
+      setLoading(false);
     } catch (err) {
       if (err.toString().includes("Network Error")) {
         setOnline(false);
@@ -55,9 +58,22 @@ export default function App() {
   });
 
   const searchLength = filterRobotsCardByName.length;
-
-  return !robots ? (
-    <h1 className="tc">Loading....</h1>
+  return loading ? (
+    <div className="tc">
+      <h1 className="f1">RoboFriends</h1>
+      <SearchBox searchChange={onSearchChange} />
+      <ScrollWrapper>
+        <h1 className="f1 pa7">Loading...</h1>
+      </ScrollWrapper>
+    </div>
+  ) : !robots ? (
+    <div className="tc">
+      <h1 className="f1 ">RoboFriends</h1>
+      <SearchBox searchChange={onSearchChange} />
+      <ScrollWrapper>
+        <h1 className="f1 pa7">something has wrong place contact Author</h1>
+      </ScrollWrapper>
+    </div>
   ) : (
     <div className="tc">
       <h1 className="f1">RoboFriends</h1>

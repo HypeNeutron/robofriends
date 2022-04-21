@@ -60,7 +60,7 @@ export default function App() {
   const searchLength = filterRobotsCardByName.length;
   return loading ? (
     <div className="tc">
-      <h1 className="f1">RoboFriends</h1>
+      <h1 className="f1 pv4">RoboFriends</h1>
       <SearchBox searchChange={onSearchChange} />
       <ScrollWrapper>
         <h1 className="f1 pa7">Loading...</h1>
@@ -68,7 +68,7 @@ export default function App() {
     </div>
   ) : !robots ? (
     <div className="tc">
-      <h1 className="f1 ">RoboFriends</h1>
+      <h1 className="f1 pv4">RoboFriends</h1>
       <SearchBox searchChange={onSearchChange} />
       <ScrollWrapper>
         <h1 className="f1 pa7">something has wrong place contact Author</h1>
@@ -76,7 +76,7 @@ export default function App() {
     </div>
   ) : (
     <div className="tc">
-      <h1 className="f1">RoboFriends</h1>
+      <h1 className="f1 pv4">RoboFriends</h1>
       <SearchBox searchChange={onSearchChange} />
       <ScrollWrapper>
         {!online && (
